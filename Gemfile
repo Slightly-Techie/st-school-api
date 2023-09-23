@@ -12,8 +12,8 @@ gem "sqlite3", "~> 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
-gem "activeadmin", github: "activeadmin/activeadmin", branch: "master"
-gem "arctic_admin"
+gem "activeadmin"
+gem "arctic_admin", '4.2.3'
 gem "awesome_rails_console"
 gem "bootsnap", require: false
 gem "devise"

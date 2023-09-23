@@ -22,3 +22,13 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+### Admin panel
+
+```bash
+docker-compose up #this should start the server
+```
+
+Go to localhost:3000/admin
+Login with username: admin, password: password

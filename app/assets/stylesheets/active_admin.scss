@@ -8,8 +8,26 @@
 // $sidebar-width: 242px;
 
 // Active Admin's got SASS!
-@import "active_admin/mixins";
-@import "active_admin/base";
+@import "arctic_admin/base";
+$primary-color: #063e0f;
+
+// $primary-color: #111111;
+// $text-color: #1e1e1e;
+
+
+#login {
+  h2 {
+    color: $primary-color;
+  }
+}
+
+.flash_notice {
+  background-color: $primary-color;
+}
+
+.footer {
+  display: none;
+}
 
 // Overriding any non-variable Sass must be done after the fact.
 // For example, to change the default status-tag color:
