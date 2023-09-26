@@ -7,14 +7,5 @@ class User < ApplicationRecord
     validates_with EmailAddress::ActiveRecordValidator, field: :email
     validates :password, presence: true, length: { minimum: 8 }, format: { with: /\A(?=.*[A-Z])(?=.*[\W_])/, message: "must include at least one capital letter and one symbol" }, on: :create
 
-    enum role: {
-        'Admin': 1,
-        'Teacher': 2,
-        'Student': 3
-    }
-
-    enum track: {
-        'Frontend': 1,
-        'Backend': 2,
-    }
+    enum role: {Admin: "Admin", Teacher: "Teacher",student: "Student"}
 end
