@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema[7.0].define(version: 2023_09_28_125531) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2023_09_29_221937) do
+>>>>>>> Stashed changes
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_125531) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+<<<<<<< Updated upstream
   create_table "contacts", force: :cascade do |t|
     t.integer "contact_type"
     t.string "phone"
@@ -67,10 +72,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_125531) do
     t.integer "role"
     t.string "reset_password_token"
     t.time "reset_password_sent_at"
+=======
+  create_table "stack_options", force: :cascade do |t|
+    t.string "name"
+    t.bigint "stack_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stack_id"], name: "index_stack_options_on_stack_id"
+  end
+
+  create_table "stacks", force: :cascade do |t|
+    t.string "name"
+>>>>>>> Stashed changes
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< Updated upstream
   add_foreign_key "contacts", "users"
   add_foreign_key "tracks", "users"
+=======
+  add_foreign_key "stack_options", "stacks"
+>>>>>>> Stashed changes
 end
