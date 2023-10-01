@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< Updated upstream
-ActiveRecord::Schema[7.0].define(version: 2023_09_28_125531) do
-=======
-ActiveRecord::Schema[7.0].define(version: 2023_09_29_221937) do
->>>>>>> Stashed changes
+ActiveRecord::Schema[7.0].define(version: 2023_10_01_001049) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,7 +40,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_221937) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-<<<<<<< Updated upstream
   create_table "contacts", force: :cascade do |t|
     t.integer "contact_type"
     t.string "phone"
@@ -55,24 +50,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_221937) do
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
-  create_table "tracks", force: :cascade do |t|
-    t.string "backend"
-    t.string "frontend"
-    t.bigint "user_id", null: false
+  create_table "payment_methods", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "password_digest"
-    t.integer "role"
-    t.string "reset_password_token"
-    t.time "reset_password_sent_at"
-=======
+  create_table "payment_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "stack_options", force: :cascade do |t|
     t.string "name"
     t.bigint "stack_id", null: false
@@ -83,15 +72,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_221937) do
 
   create_table "stacks", force: :cascade do |t|
     t.string "name"
->>>>>>> Stashed changes
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< Updated upstream
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "stack"
+    t.string "language"
+    t.string "payment_type"
+    t.string "payment_method"
+    t.string "payment_status"
+    t.float "amount"
+    t.string "phone_number"
+    t.string "reset_password_token"
+    t.time "reset_password_sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "contacts", "users"
-  add_foreign_key "tracks", "users"
-=======
   add_foreign_key "stack_options", "stacks"
->>>>>>> Stashed changes
 end
