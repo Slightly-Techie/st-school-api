@@ -11,7 +11,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - local
-  api:
+  school_api:
     build: .
     entrypoint: "./docker/entrypoint.sh"
     environment:
@@ -26,9 +26,15 @@ services:
     depends_on:
       - db
     ports:
-      - "3000:3000"
+      - "6001:3000"
     networks:
       - local
+      - webgateway
+    labels:
+      - traefik.http.routers.school_api.rule=Host(`school-api.slightlytechie.com`)
+      - traefik.http.routers.school_api.tls=true
+      - traefik.http.routers.school_api.tls.certresolver=lets-encrypt
+      - traefik.port=6001
 
 volumes:
   postgres_data: {}
@@ -36,3 +42,5 @@ volumes:
 
 networks:
   local:
+  webgateway:
+    external: true
