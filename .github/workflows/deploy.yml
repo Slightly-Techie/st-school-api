@@ -1,0 +1,24 @@
+name: SSH Deploy
+
+on:
+  push:
+    branches:
+      - main # Replace with your desired branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: SSH into Server and Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SCHOOL_SSH_HOST }}
+          username: ${{ secrets.SCHOOL_SSH_USERNAME }}
+          key: ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SCHOOL_SSH_PORT }}
+          script: |
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }} ${{ secrets.SCHOOL_SSH_USERNAME }}@${{ secrets.SCHOOL_SSH_HOST }} 'cd ~/apps/st-school-api && git pull origin main && docker-compose up --build -d'
