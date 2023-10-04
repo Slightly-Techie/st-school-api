@@ -28,5 +28,7 @@ module StSchoolApi
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+
+    config.hosts << "school-api.slightlytechie.com"
   end
 end
