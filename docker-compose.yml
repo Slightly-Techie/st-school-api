@@ -29,8 +29,8 @@ services:
       - webgateway
     labels:
       - traefik.http.routers.authapi.rule=Host(`school-api.slightlytechie.com`)
-      # - traefik.http.routers.authapi.tls=true
-      # - traefik.http.routers.authapi.tls.certresolver=lets-encrypt
+      - traefik.http.routers.authapi.tls=true
+      - traefik.http.routers.authapi.tls.certresolver=lets-encrypt
       - traefik.port=5001
 
 volumes:
