@@ -26,7 +26,7 @@ services:
     depends_on:
       - db
     ports:
-      - "5001:3000"
+      - "6001:3000"
     networks:
       - local
       - webgateway
