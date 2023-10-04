@@ -10,15 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: SSH into Server and Deploy
-        uses: appleboy/ssh-action@master
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.5.4
         with:
-          host: ${{ secrets.SCHOOL_SSH_HOST }}
-          username: ${{ secrets.SCHOOL_SSH_USERNAME }}
-          key: ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SCHOOL_SSH_PORT }}
-          script: |
-            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }} ${{ secrets.SCHOOL_SSH_USERNAME }}@${{ secrets.SCHOOL_SSH_HOST }} cd ~/apps/st-school-api && git pull origin main && docker-compose up --build -d
+          ssh-private-key: ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }}
+
+      - name: SSH into the remote server
+        run: |
+          ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa ${{secrets.SCHOOL_SSH_USERNAME}}@${{secrets.SCHOOL_SSH_HOST}}
+          cd /home/kwesi/apps/st-school-api
+          git pull origin main
+          docker-compose up --build -d
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
