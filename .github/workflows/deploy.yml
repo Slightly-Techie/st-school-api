@@ -21,4 +21,4 @@ jobs:
           key: ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }}
           port: ${{ secrets.SCHOOL_SSH_PORT }}
           script: |
-            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }} ${{ secrets.SCHOOL_SSH_USERNAME }}@${{ secrets.SCHOOL_SSH_HOST }} 'cd ~/apps/st-school-api && git pull origin main && docker-compose up --build -d'
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }} ${{ secrets.SCHOOL_SSH_USERNAME }}@${{ secrets.SCHOOL_SSH_HOST }} cd ~/apps/st-school-api && git pull origin main && docker-compose up --build -d
