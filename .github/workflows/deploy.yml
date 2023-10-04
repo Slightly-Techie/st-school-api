@@ -25,4 +25,4 @@ jobs:
           git pull origin main
           docker-compose up --build -d
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }}
