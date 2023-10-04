@@ -11,7 +11,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - local
-  api:
+  school_api:
     build: .
     entrypoint: "./docker/entrypoint.sh"
     env_file: 
@@ -28,9 +28,9 @@ services:
       - local
       - webgateway
     labels:
-      - traefik.http.routers.authapi.rule=Host(`school-api.slightlytechie.com`)
-      - traefik.http.routers.authapi.tls=true
-      - traefik.http.routers.authapi.tls.certresolver=lets-encrypt
+      - traefik.http.routers.school_api.rule=Host(`school-api.slightlytechie.com`)
+      - traefik.http.routers.school_api.tls=true
+      - traefik.http.routers.school_api.tls.certresolver=lets-encrypt
       - traefik.port=6001
 
 volumes:
