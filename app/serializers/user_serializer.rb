@@ -26,8 +26,17 @@
 #
 #  fk_rails_...  (stack_option_id => stack_options.id)
 #
-require 'rails_helper'
+class UserSerializer
+  include JSONAPI::Serializer
+  attributes :first_name, :last_name, :email,:password, :password_confirmation, 
+             :payment_type, :payment_method, :payment_status,
+             :amount, :phone_number
 
-RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  attribute :stack_option do |user|
+    StackOptionSerializer.new(user.stack_option).serializable_hash[:data][:attributes]
+  end
+
+  belongs_to :stack_option  
+
+  cache_options store: Rails.cache, namespace: 'jsonapi-serializer', expires_in: 1.hour
 end

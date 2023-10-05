@@ -14,12 +14,9 @@ services:
   school_api:
     build: .
     entrypoint: "./docker/entrypoint.sh"
-    environment:
-      - RAILS_ENV=${RAILS_ENV}
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    env_file: 
+      - .env
+      
     volumes:
       - .:/app
       - app-storage:/rails/storage
