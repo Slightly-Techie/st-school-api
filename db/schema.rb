@@ -81,8 +81,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_001049) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.string "stack"
-    t.string "language"
     t.string "payment_type"
     t.string "payment_method"
     t.string "payment_status"
@@ -90,10 +88,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_001049) do
     t.string "phone_number"
     t.string "reset_password_token"
     t.time "reset_password_sent_at"
+    t.bigint "stack_option_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["stack_option_id"], name: "index_users_on_stack_option_id"
   end
 
   add_foreign_key "contacts", "users"
   add_foreign_key "stack_options", "stacks"
+  add_foreign_key "users", "stack_options"
 end

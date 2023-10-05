@@ -1,5 +1,35 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :bigint           not null, primary key
+#  amount                 :float
+#  email                  :string
+#  first_name             :string
+#  last_name              :string
+#  password_digest        :string
+#  payment_method         :string
+#  payment_status         :string
+#  payment_type           :string
+#  phone_number           :string
+#  reset_password_sent_at :time
+#  reset_password_token   :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  stack_option_id        :bigint           not null
+#
+# Indexes
+#
+#  index_users_on_stack_option_id  (stack_option_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (stack_option_id => stack_options.id)
+#
 class User < ApplicationRecord
     has_secure_password
+    belongs_to :stack_option
+    
     
 
     validates :first_name, :last_name, presence: true
@@ -10,10 +40,10 @@ class User < ApplicationRecord
     after_create :set_amount
 
     def set_amount
-        if payment_type == "Full Payment (GHC 500)"
-            self.amount = 500
-        elsif payment_type == "Partial Payment(GHC 100/m)"
-            self.amount = 100
+        if payment_type == "Full"
+            self.amount = ENV["FULL"].to_i
+        elsif payment_type == "Part"
+            self.amount = ENV["PART"].to_i
         end
 
         save!

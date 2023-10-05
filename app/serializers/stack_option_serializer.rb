@@ -16,8 +16,16 @@
 #
 #  fk_rails_...  (stack_id => stacks.id)
 #
-require 'rails_helper'
+class StackOptionSerializer
+  include JSONAPI::Serializer
+  attributes :name
 
-RSpec.describe StackOption, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  attribute :stack do |stack_option|
+    StackSerializer.new(stack_option.stack).serializable_hash[:data][:attributes].slice(:name)
+  end
+
+
+  belongs_to :stack
+
+  cache_options store: Rails.cache, namespace: 'jsonapi-serializer', expires_in: 1.hour
 end
