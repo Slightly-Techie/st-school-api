@@ -8,6 +8,10 @@ Rails.application.routes.draw do
       resources :users
       resources :stacks
       resources :payment_types
+
+      namespace :auth, path: "/" do
+        post "/login", to: "sessions#create"
+      end
     end
   end
 end

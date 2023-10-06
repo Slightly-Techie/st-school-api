@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :payment_status
       t.float :amount
       t.string :phone_number
+      t.string :auth_token
       t.string :reset_password_token
       t.time :reset_password_sent_at
 
