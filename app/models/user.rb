@@ -4,6 +4,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  amount                 :float
+#  auth_token             :string
 #  email                  :string
 #  first_name             :string
 #  last_name              :string
@@ -47,6 +48,11 @@ class User < ApplicationRecord
         end
 
         save!
+    end
+
+    def token
+        update(auth_token: JsonWebToken.encode({ user_id: id }))
+        auth_token
     end
 
 end

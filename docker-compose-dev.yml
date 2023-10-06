@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:14.2-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: "postgres -c 'max_connections=500'"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - local
+  school_api:
+    build: .
+    entrypoint: "./docker/entrypoint.sh"
+    env_file: 
+      - .env
+      
+    volumes:
+      - .:/app
+      - app-storage:/rails/storage
+    depends_on:
+      - db
+    ports:
+      - "6001:3000"
+    networks:
+       - local
+
+   
+
+volumes:
+  postgres_data: {}
+  app-storage: {}
+
+networks:
+  local:
