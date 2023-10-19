@@ -26,6 +26,7 @@ gem "sprockets", "<4"
 gem 'bcrypt', '~> 3.1.12'
 gem 'email_address', '~> 0.2.4'
 gem "jsonapi-serializer"
+gem "jwt"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]

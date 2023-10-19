@@ -86,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_001049) do
     t.string "payment_status"
     t.float "amount"
     t.string "phone_number"
+    t.string "auth_token"
     t.string "reset_password_token"
     t.time "reset_password_sent_at"
     t.bigint "stack_option_id", null: false

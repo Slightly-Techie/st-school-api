@@ -4,6 +4,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  amount                 :float
+#  auth_token             :string
 #  email                  :string
 #  first_name             :string
 #  last_name              :string
