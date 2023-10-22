@@ -1,5 +1,9 @@
 class Api::V1::UsersController < ApplicationController
 
+    def show
+        render json: UserSerializer.new(@current_user).serializable_hash[:data][:attributes], status: :ok
+    end
+
     def create
         stack_option = StackOption.find_by(name: params[:stack_option])
         @user = User.create(user_params.except(:stack_option).merge(stack_option: stack_option))
