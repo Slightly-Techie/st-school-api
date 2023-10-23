@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.6"
 gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+
 
 gem "activeadmin"
 gem "arctic_admin", '4.2.3'
