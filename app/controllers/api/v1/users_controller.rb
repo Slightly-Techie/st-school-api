@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
     def show
-        render json: UserSerializer.new(@current_user).serializable_hash[:data][:attributes], status: :ok
+        render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes], status: :ok
     end
 
     def create
