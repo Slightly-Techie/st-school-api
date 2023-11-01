@@ -18,6 +18,10 @@ class CertificateSerializer
   include JSONAPI::Serializer
   attributes :certificate_id, :completion_date, :cohort
 
+  attribute :user do |certificate|
+    UserSerializer.new(certificate.user).serializable_hash[:data][:attributes]
+  end
+
   belongs_to :user
 
   cache_options store: Rails.cache, namespace: 'jsonapi-serializer', expires_in: 1.hour 
