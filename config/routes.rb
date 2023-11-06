@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resource :users
       resources :stacks
       resources :payment_types
+      get 'certificates', to: 'certificates#show'
 
       namespace :auth, path: "/" do
         post "/login", to: "sessions#create"
