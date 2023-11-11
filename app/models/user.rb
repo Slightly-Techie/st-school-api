@@ -55,4 +55,21 @@ class User < ApplicationRecord
         auth_token
     end
 
+    def generate_password_token!
+        self.reset_password_token = SecureRandom.hex(3).upcase
+        self.reset_password_sent_at = Time.now.utc
+        save!
+    end
+
+    def token_valid?
+        (reset_password_sent_at + 4.hours).past?
+    end
+
+    def reset_password!(password)
+        self.reset_password_token = nil
+        self.password = password
+        self.password_confirmation = password
+        save!
+    end
+
 end

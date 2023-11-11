@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       namespace :auth, path: "/" do
         post "/login", to: "sessions#create"
       end
+
+      post "/forgot-password", to: "passwords#create"
+      post "/reset-password", to: "passwords#update", as: :reset_password
     end
   end
 end
