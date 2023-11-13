@@ -22,4 +22,7 @@ jobs:
             pwd
             cd /home/kwesi/apps/st-school-api
             git pull origin main
-            docker-compose up --build -d
+
+            docker-compose build
+            docker-compose run school_api rails db:migrate db:seed
+            docker-compose up -d
