@@ -42,8 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_30_235012) do
 
   create_table "certificates", force: :cascade do |t|
     t.bigint "certificate_id"
-    t.datetime "completion_date"
-    t.string "cohort"
+    t.datetime "issue_date"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
