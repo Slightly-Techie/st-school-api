@@ -1,4 +1,4 @@
-ActiveAdmin.register Comment do
+ActiveAdmin.register UserComment do
     permit_params :body, :user_name, :user_email
   
     index do
@@ -21,7 +21,7 @@ ActiveAdmin.register Comment do
     
   
     form do |f|
-      f.inputs 'Comment Details' do
+      f.inputs 'User Comment Details' do
         f.input :body
         f.input :user_name
         f.input :user_email
