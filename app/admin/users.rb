@@ -1,6 +1,7 @@
 ActiveAdmin.register User do
     permit_params :first_name, :last_name, :email,:password, :password_confirmation, 
-    :payment_type, :payment_method, :payment_status,:amount, :phone_number, :created_at, :updated_at,
+    :payment_type, :payment_method, :payment_status,
+    :amount, :phone_number, :created_at, :updated_at,
     :stack_option
   
     index do
