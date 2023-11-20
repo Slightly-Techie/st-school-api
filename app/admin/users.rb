@@ -10,7 +10,7 @@ ActiveAdmin.register User do
       column :email
       column :first_name
       column :last_name
-      colum :phone_number
+      column :phone_number
       column :payment_type
       column :payment_method
       column :payment_status
