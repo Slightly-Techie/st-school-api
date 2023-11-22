@@ -1,6 +1,7 @@
 ActiveAdmin.register User do
-    permit_params :first_name, :last_name, :email,:password, :password_confirmation, 
-    :payment_type, :payment_method, :payment_status,:amount, :phone_number, :created_at, :updated_at,
+    permit_params :first_name, :last_name, :email, 
+    :payment_type, :payment_method, :payment_status,
+    :amount, :phone_number, :created_at, :updated_at,
     :stack_option
   
     index do
@@ -37,8 +38,6 @@ ActiveAdmin.register User do
         f.input :first_name
         f.input :last_name
         f.input :email
-        f.input :password
-        f.input :password_confirmation
         f.input :payment_type
         f.input :payment_method
         f.input :payment_status
