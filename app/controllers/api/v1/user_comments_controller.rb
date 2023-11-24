@@ -1,7 +1,7 @@
 class Api::V1::UserCommentsController < ApplicationController
     def index
         @comments = UserComment.all 
-        render json: UserCommentSerializer.new(@comments).serializable_hash[:data][:attributes], status: :ok
+        render json: UserCommentSerializer.new(@comments).serializable_hash[:data].map { |comment| comment[:attributes] }, status: :ok            
     end
 
     def create  
@@ -13,6 +13,7 @@ class Api::V1::UserCommentsController < ApplicationController
         end
     end
 
+    
     private
 
     def comment_params
