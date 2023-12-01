@@ -5,6 +5,7 @@
 #  id                     :bigint           not null, primary key
 #  amount                 :float
 #  auth_token             :string
+#  completed              :boolean
 #  email                  :string
 #  first_name             :string
 #  last_name              :string
@@ -29,9 +30,9 @@
 #
 class UserSerializer
   include JSONAPI::Serializer
-  attributes :first_name, :last_name, :email,:password, :password_confirmation, 
+  attributes :first_name, :last_name, :id, :email,:password, :password_confirmation, 
              :payment_type, :payment_method, :payment_status,
-             :amount, :phone_number
+             :amount, :phone_number, :completed
 
   attribute :stack_option do |user|
     StackOptionSerializer.new(user.stack_option).serializable_hash[:data][:attributes]

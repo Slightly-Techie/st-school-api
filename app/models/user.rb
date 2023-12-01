@@ -5,6 +5,7 @@
 #  id                     :bigint           not null, primary key
 #  amount                 :float
 #  auth_token             :string
+#  completed              :boolean
 #  email                  :string
 #  first_name             :string
 #  last_name              :string
@@ -71,5 +72,9 @@ class User < ApplicationRecord
         self.password_confirmation = password
         save!
     end
+
+    # def eligible_for_certificate?
+    #     completed == "true"
+    # end
 
 end

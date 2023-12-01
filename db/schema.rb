@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_20_194839) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_01_195418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -110,6 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_194839) do
     t.bigint "stack_option_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "completed", default: false
     t.index ["stack_option_id"], name: "index_users_on_stack_option_id"
   end
 
