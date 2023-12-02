@@ -30,8 +30,7 @@
 #
 class UserSerializer
   include JSONAPI::Serializer
-  attributes :first_name, :last_name, :id, :email,:password, :password_confirmation, 
-             :payment_type, :payment_method, :payment_status,
+  attributes :first_name, :last_name, :id, :email, :payment_type, :payment_method, :payment_status,
              :amount, :phone_number, :completed
 
   attribute :stack_option do |user|

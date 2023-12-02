@@ -2,13 +2,13 @@
 #
 # Table name: certificates
 #
-#  id              :bigint           not null, primary key
-#  cohort          :string
-#  completion_date :datetime
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  certificate_id  :bigint
-#  user_id         :bigint
+#  id                 :bigint           not null, primary key
+#  certificate_number :string
+#  cohort             :string
+#  completion_date    :datetime
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  user_id            :bigint
 #
 # Indexes
 #
@@ -16,7 +16,12 @@
 #
 class Certificate < ApplicationRecord
     belongs_to :user
-    belongs_to :stack
-    belongs_to :stack_option
+    
+    after_create :set_certificate_number
+
+    def set_certificate_number
+        self.certificate_number = "ST-#{SecureRandom.hex(6).upcase}"
+        save!
+    end
     
 end

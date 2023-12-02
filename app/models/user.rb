@@ -31,6 +31,7 @@
 class User < ApplicationRecord
     has_secure_password
     belongs_to :stack_option
+    has_one :certificate
     
     
 
@@ -73,8 +74,8 @@ class User < ApplicationRecord
         save!
     end
 
-    # def eligible_for_certificate?
-    #     completed == "true"
-    # end
+    def eligible_for_certificate?
+        true
+    end
 
 end

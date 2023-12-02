@@ -17,11 +17,10 @@ class Api::V1::CertificatesController < ApplicationController
     end
 
     def create
-        user = User.find(params[:id])
-
-        if user.completed
-            certificate = Certificate.new(cert_params.except(:user).merge(user: user))            
-            if certificate.save
+        
+        if @current_user.eligible_for_certificate?
+            certificate = Certificate.new(cert_params)            
+            if certificate.save!
                 render json: CertificateSerializer.new(certificate).serializable_hash[:data][:attributes], status: :created
             else
                 render json: { errors: "User not eligible for certificate" }, status: :unprocessable_entity
@@ -32,13 +31,13 @@ class Api::V1::CertificatesController < ApplicationController
     private
 
     def set_current_user
-        @current_user = User.find(params[:id])
+        @current_user = User.find(params[:user_id])
         return render json: { error: 'Not Authorized' }, status: :unauthorized unless @current_user
         @current_user
     end
 
     def cert_params
-        params.permit(:certificate_id, :cohort, :completion_date, :user)
+        params.permit( :cohort, :completion_date, :user_id)
     end
 
 end
