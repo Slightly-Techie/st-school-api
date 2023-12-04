@@ -2,13 +2,13 @@
 #
 # Table name: certificates
 #
-#  id              :bigint           not null, primary key
-#  cohort          :string
-#  completion_date :datetime
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  certificate_id  :bigint
-#  user_id         :bigint
+#  id                 :bigint           not null, primary key
+#  certificate_number :string
+#  cohort             :string
+#  completion_date    :datetime
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  user_id            :bigint
 #
 # Indexes
 #

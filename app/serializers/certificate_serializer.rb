@@ -2,13 +2,13 @@
 #
 # Table name: certificates
 #
-#  id              :bigint           not null, primary key
-#  cohort          :string
-#  completion_date :datetime
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  certificate_id  :bigint
-#  user_id         :bigint
+#  id                 :bigint           not null, primary key
+#  certificate_number :string
+#  cohort             :string
+#  completion_date    :datetime
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  user_id            :bigint
 #
 # Indexes
 #
@@ -16,10 +16,10 @@
 #
 class CertificateSerializer
   include JSONAPI::Serializer
-  attributes :certificate_id, :completion_date, :cohort
+  attributes :certificate_number, :completion_date, :cohort
 
   attribute :user do |certificate|
-    UserSerializer.new(certificate.user).serializable_hash[:data][:attributes]
+    UserSerializer.new(certificate.user).serializable_hash.dig(:data, :attributes).slice(:first_name, :last_name, :stack_option)
   end
 
   belongs_to :user

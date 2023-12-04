@@ -25,6 +25,6 @@ class Api::V1::UsersController < ApplicationController
         params.permit(:first_name, :last_name, :email,:password, :password_confirmation, 
                       :payment_type, :payment_method, :payment_status,
                       :amount, :phone_number,
-                      :stack_option)
+                      :stack_option, :completed)
     end
 end

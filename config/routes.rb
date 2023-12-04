@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resource :users
       resources :stacks
       resources :payment_types
-      get 'certificates', to: 'certificates#show'
+      resources :certificates
       resources :user_comments, only: [:index, :create]
 
       namespace :auth, path: "/" do
