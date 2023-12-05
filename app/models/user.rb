@@ -63,9 +63,11 @@ class User < ApplicationRecord
         save!
     end
 
+
     def token_valid?
-        (reset_password_sent_at + 4.hours).past?
+        reset_password_sent_at.present? && reset_password_sent_at + 4.hours < Time.now
     end
+      
 
     def reset_password!(password)
         self.reset_password_token = nil
