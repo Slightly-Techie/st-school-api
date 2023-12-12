@@ -2,7 +2,7 @@ ActiveAdmin.register User do
     permit_params :first_name, :last_name, :email, 
     :payment_type, :payment_method, :payment_status,
     :amount, :phone_number, :created_at, :updated_at,
-    :stack_option
+    :stack_option, :completed
   
     index do
       selectable_column
@@ -17,6 +17,7 @@ ActiveAdmin.register User do
       column :amount
       column :created_at
       column :updated_at
+      column :completed
       
       actions
     end
@@ -32,6 +33,7 @@ ActiveAdmin.register User do
     filter :payment_type
     filter :payment_method
     filter :payment_status
+    filter :completed
   
     form do |f|
       f.inputs 'User Details' do
@@ -46,6 +48,7 @@ ActiveAdmin.register User do
         f.input :stack_option
         f.input :created_at
         f.input :updated_at
+        f.input :completed
       end
       f.actions
     end
