@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_02_131202) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_28_184504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_02_131202) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.string "amount_paid"
+    t.string "payment_method"
+    t.string "payment_type"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
   create_table "stack_options", force: :cascade do |t|
     t.string "name"
     t.bigint "stack_id", null: false
@@ -99,9 +109,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_02_131202) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.string "payment_type"
-    t.string "payment_method"
-    t.string "payment_status"
     t.float "amount"
     t.string "phone_number"
     t.string "auth_token"
