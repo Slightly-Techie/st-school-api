@@ -3,16 +3,12 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
-#  amount                 :float
 #  auth_token             :string
 #  completed              :boolean
 #  email                  :string
 #  first_name             :string
 #  last_name              :string
 #  password_digest        :string
-#  payment_method         :string
-#  payment_status         :string
-#  payment_type           :string
 #  phone_number           :string
 #  reset_password_sent_at :time
 #  reset_password_token   :string
@@ -32,25 +28,37 @@ class User < ApplicationRecord
     has_secure_password
     belongs_to :stack_option
     has_one :certificate
+    has_many :payments
     
     
 
     validates :first_name, :last_name, presence: true
     validates :email, presence: true, uniqueness: true
-    validates_with EmailAddress::ActiveRecordValidator, field: :email
+    # validates_with EmailAddress::ActiveRecordValidator, field: :email
     validates :password, presence: true, length: { minimum: 8 }, format: { with: /\A(?=.*[A-Z])(?=.*[\W_])/, message: "must include at least one capital letter and one symbol" }, on: :create
 
-    after_create :set_amount
+   
 
-    def set_amount
-        if payment_type == "Full"
-            self.amount = ENV["FULL"].to_i
-        elsif payment_type == "Part"
-            self.amount = ENV["PART"].to_i
+    def payment_status
+        amount_paid = payments.sum(:amount_paid)
+        if amount_paid == ENV["FULL"].to_i
+            "Full"
+        elsif amount_paid == ENV["PART"].to_i
+            "Part"
+        else
+            "Non Payments made"
         end
-
-        save!
     end
+
+    def total_amount_paid
+        payments.sum(:amount_paid)
+    end
+
+    def remaining_payment_balance
+      return 0 if payment_status == "Full"
+      ENV["PART_PAYMENT_FULL_AMOUNT"].to_i - total_amount_paid
+    end
+
 
     def token
         update(auth_token: JsonWebToken.encode({ user_id: id }))

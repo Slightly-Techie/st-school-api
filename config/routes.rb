@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :payment_types
       resources :certificates
       resources :user_comments, only: [:index, :create]
+      resources :payments
 
       namespace :auth, path: "/" do
         post "/login", to: "sessions#create"
