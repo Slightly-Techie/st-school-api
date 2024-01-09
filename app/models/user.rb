@@ -29,15 +29,16 @@ class User < ApplicationRecord
     belongs_to :stack_option
     has_one :certificate
     has_many :payments
-    
-    
+
+
+
 
     validates :first_name, :last_name, presence: true
     validates :email, presence: true, uniqueness: true
     # validates_with EmailAddress::ActiveRecordValidator, field: :email
     validates :password, presence: true, length: { minimum: 8 }, format: { with: /\A(?=.*[A-Z])(?=.*[\W_])/, message: "must include at least one capital letter and one symbol" }, on: :create
 
-   
+
 
     def payment_status
         amount_paid = payments.sum(:amount_paid)
@@ -75,17 +76,13 @@ class User < ApplicationRecord
     def token_valid?
         reset_password_sent_at.present? && reset_password_sent_at + 4.hours < Time.now
     end
-      
+
 
     def reset_password!(password)
         self.reset_password_token = nil
         self.password = password
         self.password_confirmation = password
         save!
-    end
-
-    def eligible_for_certificate?
-        true
     end
 
 end
