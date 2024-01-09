@@ -17,6 +17,11 @@ class Api::V1::UsersController < ApplicationController
             end
     end
 
+    def check_email
+        user_exists = User.exists?(email: params[:email])
+        render json: { user_exists: user_exists }, status: :ok
+    end
+
     def update
         @user.update(user_params)
         render json: UserSerializer.new(@user).serializable_hash[:data][:attributes], status: :ok
