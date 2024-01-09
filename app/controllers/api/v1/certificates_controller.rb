@@ -3,7 +3,7 @@ class Api::V1::CertificatesController < ApplicationController
 
     def show
         user = User.find(params[:id])
-        
+
         if user
             certificate = Certificate.find_by(user: user)
             if certificate
@@ -17,9 +17,9 @@ class Api::V1::CertificatesController < ApplicationController
     end
 
     def create
-        
-        if @current_user.eligible_for_certificate?
-            certificate = Certificate.new(cert_params)            
+
+        if @current_user.completed?
+            certificate = Certificate.new(cert_params)
             if certificate.save!
                 render json: CertificateSerializer.new(certificate).serializable_hash[:data][:attributes], status: :created
             else
