@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_184504) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.string "amount_paid"
+    t.integer "amount_paid"
     t.string "payment_method"
     t.string "payment_type"
     t.bigint "user_id"
@@ -109,7 +109,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_184504) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.float "amount"
     t.string "phone_number"
     t.string "auth_token"
     t.string "reset_password_token"
@@ -117,7 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_184504) do
     t.bigint "stack_option_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "completed"
+    t.boolean "completed", default: false
     t.index ["stack_option_id"], name: "index_users_on_stack_option_id"
   end
 
